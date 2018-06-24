@@ -1,13 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Hacker : MonoBehaviour {
 	
+	// Game Configuration Data
+	string[] level1Passwords = {"books", "aisle", "shelf", "password", "font", "borrow"};
+	string[] level2Passwords = {"prisoner", "handcuffs", "holster", "uniform", "arrest"};
+	string[] level3Passwords = {"starfield", "telescope", "environment", "exploration", "astronauts"};
+	const string menuHint = "You may type menu at any time";
+
+
 	// Game State
 	int level;
 	enum Screen { MainMenu, Password, Win };
-	Screen currentScreen = Screen.MainMenu;	
+	Screen currentScreen;
+	string password;
+
 
 	// Use this for initialization
 	void Start () {
@@ -30,29 +37,77 @@ public class Hacker : MonoBehaviour {
 			ShowMainMenu();
 		} else if (currentScreen == Screen.MainMenu) {
 			RunMainMenu(input);
+		} else if (currentScreen == Screen.Password){
+			CheckPassword(input);
+		} else if (currentScreen == Screen.Win) {
+			// Do nothing
 		}
 	}
 
 	void RunMainMenu(string input) {
-		if (input == "1") {
-			level = 1;
-			StartGame();
-		} else if (input == "2") {
-			level = 2;
-			StartGame();
-		} else if (input == "3") {
-			level = 3;
-			StartGame();
-		} else if (input == "007") {
+		bool isValidLevelNumber = (input == "1" || input == "2" || input == "3");
+		if (isValidLevelNumber) {
+			level = int.Parse(input);
+			AskForPassword();
+		} else if (input == "007") { // easter egg
 			Terminal.WriteLine("Please enter a selection Mr Bond:");
 		} else {
 			Terminal.WriteLine("Please enter a valid selection:");
 		}
 	} 
 
-	void StartGame() {
-		currentScreen = Screen.Password;		
-		Terminal.WriteLine("You have chosen level " + level);
+	void AskForPassword() {
+		currentScreen = Screen.Password;
+		Terminal.ClearScreen();		
+		SetRandomPassword();
+		Terminal.WriteLine("Enter a password: HINT " + password.Anagram());
+		Terminal.WriteLine(menuHint);
+	}
+
+	void SetRandomPassword() {
+		switch(level) {
+			case 1:
+				password = level1Passwords[Random.Range(0, level1Passwords.Length)];
+				break;
+			case 2:
+				password = level2Passwords[Random.Range(0, level2Passwords.Length)];
+				break;
+			case 3:
+				password = level3Passwords[Random.Range(0, level3Passwords.Length)];
+				break;
+			default:
+				Debug.LogError("Invalid level number");
+				break;
+		}
+	}
+
+	void CheckPassword(string input) {
+		if (input == password) {
+			DisplayWinScreen();
+		} else {
+			AskForPassword();
+		}
+	}
+
+	void DisplayWinScreen() {
+		currentScreen = Screen.Win;
+		Terminal.ClearScreen();
+		ShowLevelReward();
+	}
+
+	void ShowLevelReward() {
+		switch(level) {
+			case 1:
+				Terminal.WriteLine("Congratulations on clearing level 1!");
+				break;
+			case 2:
+				Terminal.WriteLine("Congratulations on clearing level 2!");
+				break;
+			case 3: 
+				Terminal.WriteLine("Congratulations on clearing level 3!");
+				break;
+		}
+		Terminal.WriteLine("Enter \"menu\" to try again");
 	}
 
 	// Update is called once per frame
