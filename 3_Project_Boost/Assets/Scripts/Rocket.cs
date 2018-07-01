@@ -15,8 +15,7 @@ public class Rocket : MonoBehaviour {
 
 
 
-	enum State{ Alive, Dying, Transcending};
-	State state = State.Alive;
+	bool isTransitioning = false;
 
 	Rigidbody rigidBody;
 	AudioSource audioSource;
@@ -30,7 +29,7 @@ public class Rocket : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (state == State.Alive) {
+		if (!isTransitioning) {
 			RespondToThrustInput();
 			RespondToRotateInput();
 		}
@@ -40,7 +39,7 @@ public class Rocket : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		if (state != State.Alive || !allowCollisions) return;
+		if (isTransitioning || !allowCollisions) return;
 
 		switch(collision.gameObject.tag) {
 			case "Friendly":
@@ -56,7 +55,7 @@ public class Rocket : MonoBehaviour {
 	}
 
 	private void StartSuccessSequence() {
-		state = State.Transcending;
+		isTransitioning = true;
 		audioSource.Stop();
 		audioSource.PlayOneShot(success);
 		successParticles.Play();
@@ -64,7 +63,7 @@ public class Rocket : MonoBehaviour {
 	}
 
 	private void StartDeathSequence() {
-		state = State.Dying;
+		isTransitioning = true;
 		audioSource.Stop();
 		audioSource.PlayOneShot(death);
 		deathParticles.Play();
@@ -90,8 +89,7 @@ public class Rocket : MonoBehaviour {
 		if (Input.GetKey(KeyCode.Space)) {
 			ApplyThrust();
 		} else {
-			mainEngineParticles.Stop();
-			audioSource.Stop();
+			StopApplyingThrust();
 		}
 	}
 
@@ -103,9 +101,13 @@ public class Rocket : MonoBehaviour {
 		mainEngineParticles.Play();
 	}
 
+	private void StopApplyingThrust() {
+		mainEngineParticles.Stop();
+		audioSource.Stop();
+	}
+
 	private void RespondToRotateInput() {
-		// Take manual control of rotation
-		rigidBody.freezeRotation = true;
+		rigidBody.angularVelocity = Vector3.zero;
 
 		float rotationThisFrame = rcsThrust * Time.deltaTime;
 
@@ -115,8 +117,6 @@ public class Rocket : MonoBehaviour {
 		} else if (Input.GetKey(KeyCode.D)) {
 			transform.Rotate(-Vector3.forward * rotationThisFrame);
 		}
-		// Resume physics control of rotation
-		rigidBody.freezeRotation = false;
 	}
 
 	private void RespondToDebugKeys() {
