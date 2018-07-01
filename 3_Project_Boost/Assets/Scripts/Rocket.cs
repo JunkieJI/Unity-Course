@@ -20,6 +20,8 @@ public class Rocket : MonoBehaviour {
 
 	Rigidbody rigidBody;
 	AudioSource audioSource;
+
+	bool allowCollisions = true;
 	// Use this for initialization
 	void Start () {
 		audioSource = GetComponent<AudioSource>();
@@ -32,10 +34,13 @@ public class Rocket : MonoBehaviour {
 			RespondToThrustInput();
 			RespondToRotateInput();
 		}
+		if (Debug.isDebugBuild) {
+			RespondToDebugKeys();
+		}
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		if (state != State.Alive) return;
+		if (state != State.Alive || !allowCollisions) return;
 
 		switch(collision.gameObject.tag) {
 			case "Friendly":
@@ -68,7 +73,12 @@ public class Rocket : MonoBehaviour {
 
 	private void LoadNextLevel() {
 		// TODO: Allow for more scenes
-		SceneManager.LoadScene(1);
+		int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+		int nextSceneIndex = currentSceneIndex + 1;
+		if (nextSceneIndex == SceneManager.sceneCountInBuildSettings) {
+			nextSceneIndex = 0;
+		}
+		SceneManager.LoadScene(nextSceneIndex);
 	}
 
 	private void LoadFirstLevel() {
@@ -107,5 +117,15 @@ public class Rocket : MonoBehaviour {
 		}
 		// Resume physics control of rotation
 		rigidBody.freezeRotation = false;
+	}
+
+	private void RespondToDebugKeys() {
+		if (Input.GetKeyDown(KeyCode.L)) {
+			LoadNextLevel();
+		} 
+
+		if (Input.GetKeyDown(KeyCode.C)) {
+			allowCollisions = !allowCollisions;
+		}
 	}
 }
