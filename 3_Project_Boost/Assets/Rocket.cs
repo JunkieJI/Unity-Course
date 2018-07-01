@@ -4,6 +4,11 @@ using UnityEngine.SceneManagement;
 public class Rocket : MonoBehaviour {
 	[SerializeField] float rcsThrust = 100f;
 	[SerializeField] float mainThrust = 100f;
+	[SerializeField] AudioClip mainEngine;
+	[SerializeField] AudioClip success;
+	[SerializeField] AudioClip death;
+
+
 
 	enum State{ Alive, Dying, Transcending};
 	State state = State.Alive;
@@ -19,27 +24,39 @@ public class Rocket : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (state == State.Alive) {
-			Thrust();
-			Rotate();
+			RespondToThrustInput();
+			RespondToRotateInput();
 		}
 	}
 
 	void OnCollisionEnter(Collision collision) {
 		if (state != State.Alive) return;
-		
+
 		switch(collision.gameObject.tag) {
 			case "Friendly":
 				// Do nothing
 				break;
 			case "Finish":
-				state = State.Transcending;
-				Invoke("LoadNextLevel", 1f);
+				StartSuccessSequence();
 				break;
 			default:
-				state = State.Dying;
-				Invoke("LoadFirstLevel", 1f);
+				StartDeathSequence();
 				break;
 		}
+	}
+
+	private void StartSuccessSequence() {
+		state = State.Transcending;
+		audioSource.Stop();
+		audioSource.PlayOneShot(success);
+		Invoke("LoadNextLevel", 1f);
+	}
+
+	private void StartDeathSequence() {
+		state = State.Dying;
+		audioSource.Stop();
+		audioSource.PlayOneShot(death);
+		Invoke("LoadFirstLevel", 1f);
 	}
 
 	private void LoadNextLevel() {
@@ -51,19 +68,23 @@ public class Rocket : MonoBehaviour {
 		SceneManager.LoadScene(0);
 	}
 
-	private void Thrust() {
+	private void RespondToThrustInput() {
 		// Handle thrust
 		if (Input.GetKey(KeyCode.Space)) {
-			rigidBody.AddRelativeForce(Vector3.up * mainThrust);
-			if (!audioSource.isPlaying) {
-				audioSource.Play();
-			}
+			ApplyThrust();
 		} else {
 			audioSource.Stop();
 		}
 	}
 
-	private void Rotate() {
+	private void ApplyThrust() {
+		rigidBody.AddRelativeForce(Vector3.up * mainThrust);
+		if (!audioSource.isPlaying) {
+			audioSource.PlayOneShot(mainEngine);
+		}
+	}
+
+	private void RespondToRotateInput() {
 		// Take manual control of rotation
 		rigidBody.freezeRotation = true;
 
