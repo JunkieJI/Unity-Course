@@ -74,14 +74,12 @@
      <Compile Include="Assets\Standard Assets\Utility\DynamicShadowSettings.cs" />
      <Compile Include="Assets\Standard Assets\Utility\EventSystemChecker.cs" />
      <Compile Include="Assets\Standard Assets\Utility\FollowTarget.cs" />
-     <Compile Include="Assets\Standard Assets\Utility\ForcedReset.cs" />
      <Compile Include="Assets\Standard Assets\Utility\FOVKick.cs" />
      <Compile Include="Assets\Standard Assets\Utility\FPSCounter.cs" />
      <Compile Include="Assets\Standard Assets\Utility\LerpControlledBob.cs" />
      <Compile Include="Assets\Standard Assets\Utility\ObjectResetter.cs" />
      <Compile Include="Assets\Standard Assets\Utility\ParticleSystemDestroyer.cs" />
      <Compile Include="Assets\Standard Assets\Utility\PlatformSpecificContent.cs" />
-     <Compile Include="Assets\Standard Assets\Utility\SimpleActivatorMenu.cs" />
      <Compile Include="Assets\Standard Assets\Utility\SimpleMouseRotator.cs" />
      <Compile Include="Assets\Standard Assets\Utility\SmoothFollow.cs" />
      <Compile Include="Assets\Standard Assets\Utility\TimedObjectActivator.cs" />
@@ -90,11 +88,11 @@
      <Compile Include="Assets\Standard Assets\Utility\WaypointProgressTracker.cs" />
      <None Include="Assets\Standard Assets\Fonts\OpenSans\License!.txt" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
- <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>/Users/Jihaad/Documents/Workspaces/personal/udemy/unity2/4_Argon Assault/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
- </Reference>
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>/Users/Jihaad/Documents/Workspaces/personal/udemy/unity2/4_Argon Assault/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.PackageManagerUI.Editor">
+ <HintPath>/Users/Jihaad/Documents/Workspaces/personal/udemy/unity2/4_Argon Assault/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
