@@ -295,9 +295,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 237984725}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca0081fb224ff4b0a9cdc4549cf38dee, type: 3}
+  m_Script: {fileID: 11500000, guid: 29194c28ad6eb4a8094343b2f4969af9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scorePerHit: 12
 --- !u!4 &244777141 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4354848751893472, guid: bf374732b0ea2c34daa340dc2de7f746,
