@@ -298,7 +298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29194c28ad6eb4a8094343b2f4969af9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scorePerHit: 12
 --- !u!4 &244777141 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4354848751893472, guid: bf374732b0ea2c34daa340dc2de7f746,
@@ -558,6 +557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathFX: {fileID: 1940865209270344, guid: 98bc4d8bfe8a541d48de318ed2a39b80, type: 2}
   parent: {fileID: 1379993953}
+  scorePerHit: 12
 --- !u!1 &748927477
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,6 +860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathFX: {fileID: 1940865209270344, guid: 98bc4d8bfe8a541d48de318ed2a39b80, type: 2}
   parent: {fileID: 1379993953}
+  scorePerHit: 12
 --- !u!1001 &1100655805
 Prefab:
   m_ObjectHideFlags: 0
@@ -985,6 +986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathFX: {fileID: 1940865209270344, guid: 98bc4d8bfe8a541d48de318ed2a39b80, type: 2}
   parent: {fileID: 1379993953}
+  scorePerHit: 12
 --- !u!1001 &1286207617
 Prefab:
   m_ObjectHideFlags: 0
@@ -992,6 +994,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 282840814}
     m_Modifications:
+    - target: {fileID: 114532126589516660, guid: 6043c5e12ec234fb8a2117200b99b17f,
+        type: 2}
+      propertyPath: guns.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4406842836938576, guid: 6043c5e12ec234fb8a2117200b99b17f, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1033,6 +1040,40 @@ Prefab:
       propertyPath: m_Name
       value: Player Death FX
       objectReference: {fileID: 0}
+    - target: {fileID: 1515586281742372, guid: 6043c5e12ec234fb8a2117200b99b17f, type: 2}
+      propertyPath: m_Name
+      value: Gun Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617459739731746, guid: 6043c5e12ec234fb8a2117200b99b17f, type: 2}
+      propertyPath: m_Name
+      value: Gun Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833843643269758, guid: 6043c5e12ec234fb8a2117200b99b17f, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962177535527752, guid: 6043c5e12ec234fb8a2117200b99b17f, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114532126589516660, guid: 6043c5e12ec234fb8a2117200b99b17f,
+        type: 2}
+      propertyPath: guns.Array.data[0]
+      value: 
+      objectReference: {fileID: 2066618041}
+    - target: {fileID: 114532126589516660, guid: 6043c5e12ec234fb8a2117200b99b17f,
+        type: 2}
+      propertyPath: guns.Array.data[1]
+      value: 
+      objectReference: {fileID: 1729210753}
+    - target: {fileID: 1515586281742372, guid: 6043c5e12ec234fb8a2117200b99b17f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617459739731746, guid: 6043c5e12ec234fb8a2117200b99b17f, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6043c5e12ec234fb8a2117200b99b17f, type: 2}
   m_IsPrefabParent: 0
@@ -1054,6 +1095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathFX: {fileID: 1940865209270344, guid: 98bc4d8bfe8a541d48de318ed2a39b80, type: 2}
   parent: {fileID: 1379993953}
+  scorePerHit: 12
 --- !u!1 &1326312055 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1238095480485456, guid: bf374732b0ea2c34daa340dc2de7f746,
@@ -1072,6 +1114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathFX: {fileID: 1940865209270344, guid: 98bc4d8bfe8a541d48de318ed2a39b80, type: 2}
   parent: {fileID: 1379993953}
+  scorePerHit: 12
 --- !u!1 &1379993952
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,6 +1161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathFX: {fileID: 1940865209270344, guid: 98bc4d8bfe8a541d48de318ed2a39b80, type: 2}
   parent: {fileID: 1379993953}
+  scorePerHit: 12
 --- !u!1 &1393957512
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,6 +1440,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf374732b0ea2c34daa340dc2de7f746, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1729210753 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1617459739731746, guid: 6043c5e12ec234fb8a2117200b99b17f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1286207617}
 --- !u!1 &1773285367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,6 +1639,11 @@ Transform:
   m_Father: {fileID: 748927479}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2066618041 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1515586281742372, guid: 6043c5e12ec234fb8a2117200b99b17f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1286207617}
 --- !u!1001 &2139278552
 Prefab:
   m_ObjectHideFlags: 0
